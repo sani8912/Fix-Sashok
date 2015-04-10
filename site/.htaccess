@@ -1,0 +1,5 @@
+Options -Indexes
+SetEnv HTTP_MOD_REWRITE off
+RewriteEngine off
+ErrorDocument 404 /404.htm
+AddDefaultCharset UTF-8
