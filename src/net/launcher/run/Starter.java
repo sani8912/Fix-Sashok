@@ -12,7 +12,7 @@ public class Starter
 	{		
 		try {
 			String jarpath = Starter.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-			int memory = BaseUtils.getPropertyInt("memory", 512);
+			int memory = BaseUtils.getPropertyInt("memory", 768);
 			
 			ArrayList<String> params = new ArrayList<String>();
 			params.add(System.getProperty("java.home")+"/bin/java");
