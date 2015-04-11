@@ -25,7 +25,7 @@ public class ProcessUtils {
             if (isErrorStream) inputStream = process.getErrorStream();
             else inputStream = process.getInputStream();
             
-            InputStreamReader reader = new InputStreamReader(inputStream, "utf8");
+            InputStreamReader reader = new InputStreamReader(inputStream, System.getProperty("file.encoding"));
             BufferedReader buf = new BufferedReader(reader);
             String line = null;
             
@@ -35,7 +35,7 @@ public class ProcessUtils {
                         if (isErrorStream)
                             BaseUtils.sendErrp(line);
                         else
-                        	BaseUtils.sendp(line);
+                            BaseUtils.sendp(line);
                     }
                 } catch (IOException ex)
                 {} finally {
@@ -47,7 +47,7 @@ public class ProcessUtils {
                 }
             }
         } catch (UnsupportedEncodingException e) {
-        	BaseUtils.sendErr("Не удалось установить кодировку при выводе сообщений об отладке");
+            BaseUtils.sendErr("Не удалось установить кодировку при выводе сообщений об отладке");
             e.printStackTrace();
         }
     }
