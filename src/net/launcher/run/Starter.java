@@ -21,7 +21,6 @@ public class Starter
 			}
 			params.add("-Xmx"+memory+"m");
 			params.add("-XX:MaxPermSize=128m");
-			params.add("-Dfile.encoding=UTF-8");
 			if(System.getProperty("os.name").toLowerCase().startsWith("mac"))
 			{
 				params.add("-Xdock:name=Minecraft");

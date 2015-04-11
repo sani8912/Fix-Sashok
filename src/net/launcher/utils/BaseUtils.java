@@ -350,13 +350,12 @@ public class BaseUtils
 			URL url = new URL(surl);
 
 			InputStream is = PostUtils.post(url, params);
-			BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is,"UTF-8"));
 
 			StringBuffer response = new StringBuffer();
 			String line;
 			while((line=rd.readLine())!=null){ response.append(line); }
 			rd.close();
-
 			String str1 = response.toString().trim();
 			send("Stream opened for " + surl + " completed, return answer: ");
 			return str1;
