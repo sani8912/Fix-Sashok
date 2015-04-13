@@ -210,6 +210,15 @@
         $sizeass  = @filesize("clients/assets.zip");
 		$usrsessions = "$masterversion<:>$md5user<:>".$md5zip."<>".$sizezip."<:>".$md5ass."<>".$sizeass."<br>".$realUser.'<:>'.strtoint(xorencode($sessid, $protectionKey)).'<br>'.$acesstoken.'<br>';
 
+        function hashc($assetsfolder,$client) {
+        	if($assetsfolder) {
+	        	$hash_md5    = str_replace("\\", "/",checkfiles('clients/'.$client.'/bin/').checkfiles('clients/'.$client.'/mods/').checkfiles('clients/'.$client.'/coremods/').checkfiles('clients/'.$client.'/natives/').checkfiles('clients/assets')).'<::>assets/indexes<:b:>assets/objects<:b:>assets/virtual<:b:>'.$client.'/bin<:b:>'.$client.'/mods<:b:>'.$client.'/coremods<:b:>'.$client.'/natives<:b:>';
+			} else {
+		        $hash_md5    = str_replace("\\", "/",checkfiles('clients/'.$client.'/bin/').checkfiles('clients/'.$client.'/mods/').checkfiles('clients/'.$client.'/coremods/').checkfiles('clients/'.$client.'/natives/')).'<::>'.$client.'/bin<:b:>'.$client.'/mods<:b:>'.$client.'/coremods<:b:>'.$client.'/natives<:b:>';
+		    }
+		    return $hash_md5;
+        }
+
         if($temp) {
 	        $filecashe = 'temp/'.$client;
 			if (file_exists($filecashe)) {
@@ -217,15 +226,13 @@
 				 $hash_md5 = fgets($fp);
 				 fclose($fp);
 			} else {
-				if($assetsfolder) {
-	        		$hash_md5    = str_replace("\\", "/",checkfiles('clients/'.$client.'/bin/').checkfiles('clients/'.$client.'/mods/').checkfiles('clients/'.$client.'/coremods/').checkfiles('clients/'.$client.'/natives/').checkfiles('clients/assets')).'<::>assets/indexes<:b:>assets/objects<:b:>assets/virtual<:b:>'.$client.'/bin<:b:>'.$client.'/mods<:b:>'.$client.'/coremods<:b:>'.$client.'/natives<:b:>';
-				} else {
-		        	$hash_md5    = str_replace("\\", "/",checkfiles('clients/'.$client.'/bin/').checkfiles('clients/'.$client.'/mods/').checkfiles('clients/'.$client.'/coremods/').checkfiles('clients/'.$client.'/natives/')).'<::>'.$client.'/bin<:b:>'.$client.'/mods<:b:>'.$client.'/coremods<:b:>'.$client.'/natives<:b:>';
-		        }
+				$hash_md5 = hashc($assetsfolder,$client);
 				$fp = fopen($filecashe, "w");
 				fwrite($fp, $hash_md5);
 				fclose($fp);
 			}
+	    } else {
+	    	$hash_md5 = hashc($assetsfolder,$client);
 	    }
 
         echo Security::encrypt($usrsessions.$hash_md5, $key1);
@@ -725,5 +732,3 @@
 
           return $password;
         }
-
-?>
