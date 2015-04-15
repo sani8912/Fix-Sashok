@@ -14,7 +14,8 @@ $file = $capeurl.$realUser.'.png';
 $exists = remoteFileExists($file);
 if ($exists) {
     $cape = 
-',       "CAPE":
+',
+        "CAPE":
 		{
 			"url":"'.$capeurl.'?/'.$realUser.'$"
 		}';

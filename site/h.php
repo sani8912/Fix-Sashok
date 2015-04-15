@@ -27,7 +27,8 @@
 			$exists = remoteFileExists($file);
 			if ($exists) {
 			    $cape = 
-			',       "CAPE":
+			',
+			        "CAPE":
 					{
 						"url":"'.$capeurl.'?/'.$realUser.'$"
 					}';
